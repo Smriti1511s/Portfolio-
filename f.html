@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smriti Singh | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* CORE VARIABLES & BASE STYLES */
+        :root {
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --accent-color: #38bdf8;
+            --card-bg: #1e293b;
+            --secondary-text: #94a3b8;
+            --border-color: #334155;
+            --gradient-1: linear-gradient(135deg, #38bdf8 0%, #06b6d4 100%);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif; /* Clean, modern body font */
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .logo {
+            font-family: 'Poppins', sans-serif; /* Bold, attractive heading font */
+        }
+
+        /* NAVIGATION BAR */
+        nav {
+            display: flex; justify-content: space-between; padding: 1.2rem 10%; align-items: center;
+            background: rgba(15, 23, 42, 0.95); position: sticky; top: 0; z-index: 1000;
+            backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color);
+        }
+
+        .logo { font-size: 1.8rem; font-weight: 800; color: var(--accent-color); text-decoration: none; letter-spacing: -1.5px; }
+        nav ul { display: flex; list-style: none; }
+        nav ul li { margin-left: 2.5rem; }
+        nav a { color: var(--text-color); text-decoration: none; font-weight: 500; transition: 0.3s; font-size: 0.95rem; }
+        nav a:hover { color: var(--accent-color); }
+
+        /* HERO / HEADER SECTION */
+        header {
+            height: 90vh; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; text-align: center; padding: 0 10%;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+        }
+
+        h1 { font-size: 4.5rem; margin-bottom: 0.5rem; letter-spacing: -3px; font-weight: 700; text-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+        .highlight { color: var(--accent-color); }
+        header p { font-size: 1.3rem; color: var(--secondary-text); max-width: 700px; font-weight: 300; }
+
+        .btn {
+            margin-top: 2.5rem; padding: 1.1rem 3.2rem; background: var(--gradient-1);
+            color: #fff; text-decoration: none; border-radius: 8px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1.5px; transition: var(--transition);
+            display: inline-block; border: none; cursor: pointer; font-size: 0.9rem;
+        }
+        .btn:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(56, 189, 248, 0.3); }
+
+        /* SECTION STYLING */
+        section { padding: 8rem 10%; border-bottom: 1px solid var(--border-color); }
+        h2 { border-left: 6px solid var(--accent-color); padding-left: 1.5rem; margin-bottom: 3.5rem; font-size: 2.5rem; letter-spacing: -1.5px; font-weight: 700; }
+
+        /* SUMMARY STYLING */
+        .summary-card {
+            background: rgba(30, 41, 59, 0.4); padding: 3.5rem; border-radius: 24px;
+            border: 1px solid var(--border-color); position: relative; overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+        .summary-text { font-size: 1.2rem; font-weight: 400; color: var(--text-color); }
+
+        /* EDUCATION & EXPERIENCE */
+        .edu-exp-item { margin-bottom: 2.5rem; padding: 2.5rem; background: var(--card-bg); border-radius: 16px; border: 1px solid var(--border-color); }
+        .item-date { color: var(--accent-color); font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; display: block; margin-bottom: 0.5rem; }
+        .item-title { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; }
+
+        /* PROJECT CARDS */
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3.5rem; }
+        .project-card {
+            background: var(--card-bg); border-radius: 20px; border: 1px solid var(--border-color);
+            overflow: hidden; display: flex; flex-direction: column; 
+            opacity: 0; transform: scale(0.9) translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .project-card.reveal { opacity: 1; transform: scale(1) translateY(0); }
+        .project-visual { width: 100%; height: 240px; overflow: hidden; border-bottom: 1px solid var(--border-color); }
+        .project-img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s ease; }
+        .project-visual:hover .project-img { transform: scale(1.1); }
+
+        /* SKILLS */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; }
+        .skill-item h4 { font-weight: 600; font-size: 1.1rem; }
+        .progress-bar { height: 10px; background-color: var(--border-color); border-radius: 10px; overflow: hidden; margin-top: 12px; }
+        .progress-fill { height: 100%; background: var(--gradient-1); width: 0; transition: width 1.5s ease-in-out; }
+
+        /* CONTACT */
+        .contact-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 5rem; }
+        .contact-form { background: rgba(255, 255, 255, 0.02); padding: 3rem; border-radius: 24px; backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.08); }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 1.1rem; margin-bottom: 1.4rem; background: rgba(15, 23, 42, 0.8); color: white; border: 1px solid var(--border-color); border-radius: 10px; font-family: 'Inter', sans-serif; }
+        .contact-item { display: flex; align-items: center; color: white; text-decoration: none; font-size: 1.15rem; padding: 12px; border-radius: 12px; transition: 0.3s; font-weight: 400; }
+        .contact-item:hover { background: rgba(56, 189, 248, 0.1); color: var(--accent-color); transform: translateX(12px); }
+        .contact-item i { font-size: 1.5rem; margin-right: 20px; width: 40px; text-align: center; }
+
+        footer { text-align: center; padding: 4rem 10%; background: #0f172a; border-top: 1px solid var(--border-color); font-size: 0.95rem; font-weight: 300; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">SS</a>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#projects">Work</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1>Hi, I'm <span class="highlight">Smriti Singh</span></h1>
+        <p>B.Tech CSE (Artificial Intelligence) Student | Focused on Deep Learning & Full-Stack Development</p>
+        <a href="#projects" class="btn">Explore My Work</a>
+    </header>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="summary-card">
+            <p class="summary-text">
+                I am a detail-oriented <strong>Artificial Intelligence & CSE</strong> student driven by a passion for building intelligent systems and seamless digital experiences. With a strong foundation in <strong>Python, Java, and JavaScript</strong>, I specialize in translating complex logical requirements into efficient, scalable code. My journey involves engineering interactive frontends and developing deep learning models to solve real-world problems.
+            </p>
+        </div>
+    </section>
+
+    <section id="education">
+        <h2>Education</h2>
+        <div class="edu-exp-item">
+            <span class="item-date">2022 - 2026</span>
+            <h3 class="item-title">Dr. A.P.J. Abdul Kalam Technical University</h3>
+            <p>B.Tech. in Computer Science and Engineering (Artificial Intelligence)</p>
+            <p class="highlight">CGPA: 7.8 (Till Semester 7)</p>
+        </div>
+        <div class="edu-exp-item">
+            <span class="item-date">2021 - 2022</span>
+            <h3 class="item-title">Prabhat Senior Secondary Public School, Kanpur</h3>
+            <p>Intermediate (XII)</p>
+            <p class="highlight">Percentage: 82%</p>
+        </div>
+        <div class="edu-exp-item">
+            <span class="item-date">2020</span>
+            <h3 class="item-title">Prabhat Senior Secondary Public School, Kanpur</h3>
+            <p>High School</p>
+            <p class="highlight">Percentage: 85%</p>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2>Experience</h2>
+        <div class="edu-exp-item">
+            <span class="item-date">Jan 2025 - Feb 2025</span>
+            <h3 class="item-title">Python Programming Intern | CodSoft</h3>
+            <ul style="margin-left: 20px; margin-top: 15px;">
+                <li>Engineered 3+ Python-based applications, improving efficiency and problem-solving skills.</li>
+                <li>Applied loops, functions, and file handling to solve 15+ complex programming problems.</li>
+                <li>Followed clean coding practices to reduce logical errors and enhance readability.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2>Technical Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-item">
+                <h4>Java, Python, JavaScript</h4>
+                <div class="progress-bar"><div class="progress-fill" data-percent="90%"></div></div>
+            </div>
+            <div class="skill-item">
+                <h4>HTML, CSS, React.js</h4>
+                <div class="progress-bar"><div class="progress-fill" data-percent="85%"></div></div>
+            </div>
+            <div class="skill-item">
+                <h4>MySQL, Git, GitHub</h4>
+                <div class="progress-bar"><div class="progress-fill" data-percent="80%"></div></div>
+            </div>
+            <div class="skill-item">
+                <h4>AI & Machine Learning</h4>
+                <div class="progress-bar"><div class="progress-fill" data-percent="95%"></div></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Featured Work</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="project-visual"><img src="ai.png" alt="Emotion Recognition" class="project-img"></div>
+                <div style="padding: 2rem;">
+                    <h3>Emotion Recognition System</h3>
+                    <p style="color: var(--accent-color); font-size: 0.85rem; margin-bottom: 12px; font-weight: 700; text-transform: uppercase;">Python, OpenCV, TensorFlow, CNN</p>
+                    <p>Engineered a Deep Learning system to classify facial expressions with 85% accuracy on 1000+ images.</p>
+                    <a href="https://github.com/Smriti1511s" class="highlight" style="text-decoration: none; font-weight: 700; display: block; margin-top: 1.5rem; font-size: 0.9rem;">GitHub Profile →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-visual"><img src="image.png" alt="DocSummary" class="project-img"></div>
+                <div style="padding: 2rem;">
+                    <h3>DocSummary Assistant</h3>
+                    <p style="color: var(--accent-color); font-size: 0.85rem; margin-bottom: 12px; font-weight: 700; text-transform: uppercase;">React.js, Gemini API, Tailwind CSS</p>
+                    <p>Automated summarization app that reduced manual document reading time by 60%.</p>
+                    <a href="https://github.com/Smriti1511s/Doc-Summary-Assistant" class="highlight" style="text-decoration: none; font-weight: 700; display: block; margin-top: 1.5rem; font-size: 0.9rem;">GitHub Profile →</a>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-visual"><img src="cafe.png" alt="Restaurant Menu" class="project-img"></div>
+                <div style="padding: 2rem;">
+                    <h3>Restaurant Menu Frontend</h3>
+                    <p style="color: var(--accent-color); font-size: 0.85rem; margin-bottom: 12px; font-weight: 700; text-transform: uppercase;">HTML, CSS, JavaScript, Bootstrap</p>
+                    <p>Developed a responsive restaurant menu interface providing an interactive browsing experience.</p>
+                    <a href="https://github.com/Smriti1511s/Restaurant-Menu-Frontend" class="highlight" style="text-decoration: none; font-weight: 700; display: block; margin-top: 1.5rem; font-size: 0.9rem;">GitHub Profile →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Let's Connect</h2>
+        <div class="contact-container">
+            <div class="contact-form">
+                <div style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(56, 189, 248, 0.08); border-radius: 12px; border: 1px solid var(--accent-color);">
+                    <h4 style="margin-bottom: 12px; font-weight: 700;">Key Achievements</h4>
+                    <p style="font-size: 0.9rem; font-weight: 400;">• Solved 400+ DSA problems on LeetCode</p>
+                    <p style="font-size: 0.9rem; font-weight: 400;">• Adobe India Hackathon 2025 Round 1 Qualifier</p>
+                    <p style="font-size: 0.9rem; font-weight: 400;">• 4-Star Python Rating on HackerRank</p>
+                </div>
+                <form>
+                    <input type="text" placeholder="Name">
+                    <input type="email" placeholder="Email">
+                    <textarea placeholder="Message"></textarea>
+                    <button type="submit" class="btn" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
+            <div class="contact-details">
+                <a href="tel:+919219571471" class="contact-item"><i class="fas fa-phone"></i> +91 9219571471</a>
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=smriti1511s@gmail.com" target="_blank" class="contact-item"><i class="fas fa-envelope"></i> smriti1511s@gmail.com</a>
+                <a href="https://github.com/Smriti1511s" target="_blank" class="contact-item"><i class="fab fa-github"></i> GitHub Profile</a>
+                <a href="https://www.linkedin.com/in/smriti-singh1511s/" target="_blank" class="contact-item"><i class="fab fa-linkedin"></i> LinkedIn Profile</a>
+            </div>
+        </div>
+    </section>
+
+    <footer><p>&copy; 2026 Smriti Singh. B.Tech Artificial Intelligence. Built with &hearts;</p></footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('reveal');
+                    const bars = entry.target.querySelectorAll('.progress-fill');
+                    bars.forEach(bar => { bar.style.width = bar.getAttribute('data-percent'); });
+                }
+            });
+        }, { threshold: 0.2 });
+        document.querySelectorAll('.project-card').forEach(card => observer.observe(card));
+        observer.observe(document.querySelector('#skills'));
+    </script>
+</body>
+</html>
